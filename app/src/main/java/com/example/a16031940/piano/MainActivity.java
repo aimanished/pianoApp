@@ -2,6 +2,7 @@ package com.example.a16031940.piano;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -9,6 +10,7 @@ import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     String pathSave = "";
     MediaRecorder mediaRecorder;
     MediaPlayer mediaPlayer;
-
+    private static int SPLAsH_TIME_OUT = 4000;
     final int REQUEST_PERMISSION_CODE = 1000;
 
     private SoundPool soundPool;
@@ -38,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent homeIntent = new Intent(MainActivity.this,HomeActivity.class);
+                startActivity(homeIntent);
+                finish();
+            }
+        },SPLAsH_TIME_OUT);
 
 
         a = (Button) findViewById(R.id.a);
